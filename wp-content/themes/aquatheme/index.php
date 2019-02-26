@@ -117,7 +117,7 @@ Template Name: Главная
 									 		<p>Количество</p>
 									 		<div>
 									 			<div data-calc-attr="minus">-</div>
-									 			<span>1</span>
+									 			<span data-calc-attr="count">1</span>
 									 			<div data-calc-attr="add">+</div>
 									 		</div>
 									 	</div>

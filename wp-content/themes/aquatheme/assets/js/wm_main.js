@@ -2,22 +2,29 @@
 
 let order = {
 	firstStep: {
-		direction: []
+		'аквастар':{
+			count: 1
+		},
+		'благодатна':{
+			count: 1
+		},
+		'магазин':{
+			count: 1
+		}
 	},
 	secondStep: {
 		mail: null,
 		phone: null,
 		fio: null,
 		adress: null,
-		firstTimeComplect: true,
-		count: 1
+		firstTimeComplect: true
 	}
 };
 
 let formStep2Valid = false;
 let priceNode = document.querySelector('.card-wrap__total span');
 let selectedProd = null;
-
+let calcCount = document.querySelector('[data-calc-attr="count"]');
 
 document.querySelector('#start-order').addEventListener('click', function(e){
 	e.preventDefault();
@@ -27,24 +34,22 @@ document.querySelector('#start-order').addEventListener('click', function(e){
 document.querySelector('.popup.popup1').addEventListener('click', function(e){
 	if ( e.target.classList.contains('direction-item__button') ) {
 		let name = e.target.innerText.toLowerCase();
-		if ( order.firstStep.direction[name] == undefined) {
-			order.firstStep.direction.push( name );
-		}
 		selectedProd = name;
 		document.querySelector('[data-wm-water-title]').innerText = e.target.innerText;
 		document.querySelector('[data-wm-s2-prices]').innerText = priceListClient[selectedProd];
 		priceNode.innerText = price_start + priceListSystem[selectedProd];
-		order.secondStep.count = 0;
-
-		let form = document.querySelector('#contact_form');
-		form.querySelector('[name="mail"]').value = order.secondStep.mail == null ? '' : order.secondStep.mail;
-		form.querySelector('[name="phone"]').value = order.secondStep.phone == null ? '' : order.secondStep.phone;
-		form.querySelector('[name="fio"]').value = order.secondStep.fio == null ? '' : order.secondStep.fio;
-		form.querySelector('[name="adress"]').value = order.secondStep.adress == null ? '' : order.secondStep.adress;
-
+		fillForm();
 		showPopUp(1);
 	}
 });
+
+function fillForm(){
+	let form = document.querySelector('#contact_form');
+	form.querySelector('[name="mail"]').value = order.secondStep.mail == null ? '' : order.secondStep.mail;
+	form.querySelector('[name="phone"]').value = order.secondStep.phone == null ? '' : order.secondStep.phone;
+	form.querySelector('[name="fio"]').value = order.secondStep.fio == null ? '' : order.secondStep.fio;
+	form.querySelector('[name="adress"]').value = order.secondStep.adress == null ? '' : order.secondStep.adress;
+}
 
 document.querySelector('.popup.popup2').addEventListener('click', function(e){
 	if ( e.target.hasAttribute('data-wm-order') ) {
@@ -58,8 +63,8 @@ document.querySelector('.popup.popup2').addEventListener('click', function(e){
 		calculatorController(e);
 	}
 	if (e.target.getAttribute('data-wm-go') == 'step-3') {
+		document.querySelector('[data-wm-order="save"]').click();
 		if (isValidStep2()) {
-
 			showPopUp(2);
 		};
 	}
@@ -84,16 +89,20 @@ function calculatorController(e){
 }
 
 function minusProduct(){
-	if (order.secondStep.count < 2) {
+	if (order.firstStep[selectedProd].count < 2) {
 		return;
 	}
 	priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
-	--order.secondStep.count;
+	--order.firstStep[selectedProd].count;
+	calcCount.innerText = order.firstStep[selectedProd].count;
+	--order.firstStep[selectedProd].count;
 }
 
 function addProduct(){
 	priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
-	++order.secondStep.count;
+	++order.firstStep[selectedProd].count;
+	calcCount.innerText = order.firstStep[selectedProd].count;
+	++order.firstStep[selectedProd].count;
 }
 
 function toggleFirstTimeComplect(theLabel){
@@ -169,7 +178,14 @@ function is_min_length(dom_elem){
 }
 
 
-
+document.querySelector('body').addEventListener('click', function(e){
+	if ( 
+		e.target.closest('.popup-close') != null &&
+		e.target.closest('#start-order') == null
+	) {
+		document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
+	}
+});
 document.addEventListener('DOMContentLoaded', function(){
 
 	/*calendar*/

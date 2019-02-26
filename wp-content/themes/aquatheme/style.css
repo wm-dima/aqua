@@ -12,3 +12,7 @@ p[data-wm-water-title] {
 .before-none.form-item__packet>div:before {
     display: none !important;
 }
+
+.wm-form-error{
+	border: 1px solid red;
+}
