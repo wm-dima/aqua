@@ -1,0 +1,14 @@
+/*
+Theme Name: The aqua theme
+*/
+
+p[data-wm-water-title] {
+    font-size: 25px;
+    color: #272727;
+    margin-top: -5px;
+    font-weight: 500;
+}
+
+.before-none.form-item__packet>div:before {
+    display: none !important;
+}
