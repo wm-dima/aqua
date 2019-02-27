@@ -1,5 +1,5 @@
 'use strict'
-alert(1);
+
 let order = {
 	firstStep: {
 		'аквастар':{
@@ -23,6 +23,7 @@ let order = {
 	}
 };
 
+let totalOrder = [];
 let formStep2Valid = false;
 let priceNode = document.querySelector('.card-wrap__total span');
 let selectedProd = null;
@@ -37,7 +38,9 @@ document.querySelector('.popup.popup1').addEventListener('click', function(e){
 	if ( e.target.classList.contains('direction-item__button') ) {
 		let name = e.target.innerText.toLowerCase();
 		selectedProd = name;
+		order.firstStep[selectedProd].count === null ? order.firstStep[selectedProd].count = 1 : '' ; 
 		document.querySelector('[data-wm-water-title]').innerText = e.target.innerText;
+		document.querySelector('#current-order-img').src = images[name];
 		document.querySelector('[data-wm-s2-prices]').innerText = priceListClient[selectedProd];
 		priceNode.innerText = price_start + priceListSystem[selectedProd];
 		fillForm();
@@ -73,16 +76,65 @@ document.querySelector('.popup.popup2').addEventListener('click', function(e){
 	}
 });
 
+document.querySelector('.popup.popup3').addEventListener('click', function(e){
+	if ( e.target.getAttribute('data-confirm-order') == "btn-3" ) {
+		sendOrder();
+	}
+});
+
+function sendOrder(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open('POST', ajaxUrl + '?action=send_order', true);
+	xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhttp.send( 'data='+JSON.stringify(order) );
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4) {
+			if (xhttp.status == 200) {
+				let obj = JSON.parse(xhttp.response );
+				if(obj.success){
+					alert('Успешно отправлено!');
+				} else {
+					alert('Что-то опшло не так, попробуйте позже');
+				}
+			} else {
+				wm_ajax_err();
+			}
+		}
+	}
+}
+
 function preparePopUp2(){
 	Object.keys(order.firstStep).forEach(function(item, i){
 		if ( order.firstStep[item].count != null ) {
 			let itemRow = document.querySelector('[data-wm-name="' + item + '"]');
 			itemRow.classList.remove('wm-hid');
+			if ( order.firstStep[item].firstTimeComplect ) {
+				itemRow.querySelector('[data-complect-first]').classList.remove('wm-hid');
+			}
 			itemRow.querySelector('[data-price-single]').innerText = priceListSystem[item];
 			itemRow.querySelector('[data-itm-count]').innerText = order.firstStep[item].count;
 			itemRow.querySelector('[data-price-total]').innerText = ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 );
 		}
 	});
+	    document.querySelector('#adress-rezult').innerText = order.secondStep.fio + ', ' + order.secondStep.adress + '.';
+	    updateOrderTotalPrice();
+};
+
+function updateOrderTotalPrice(){
+	Object.keys(order.firstStep).forEach(function(item, i){
+		if ( order.firstStep[item].count != null ) {
+			if ( order.firstStep[item].firstTimeComplect ) {
+				totalOrder.push( price_start );
+			}
+			totalOrder.push( ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 ) );
+		}
+	})
+	let sum = 0;
+	for(let i = 0; i < totalOrder.length; i++){
+	    sum += totalOrder[i] * 1;
+    }
+    document.querySelector('#order-total').innerText = sum;
+    document.querySelector('#order-total2').innerText = sum;
 }
 
 function isValidStep2(){
@@ -108,21 +160,13 @@ function minusProduct(){
 		return;
 	}
 	priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
-	try{
-		--order.firstStep[selectedProd].count;
-	} catch (e){
-		order.firstStep[selectedProd].count = 1;
-	}
+	--order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
 
 function addProduct(){
 	priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
-	try{
-		++order.firstStep[selectedProd].count;
-	} catch (e){
-		order.firstStep[selectedProd].count = 1;
-	}
+	++order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
 
@@ -197,7 +241,25 @@ function is_min_length(dom_elem){
 		return true;
 	}
 }
-
+function send_id( id ){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open('POST', ajaxUrl + '?action=send_id', true);
+	xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhttp.send( 'id='+id );
+	xhttp.onreadystatechange = function() {
+		if (xhttp.readyState == 4) {
+			if (xhttp.status == 200) {
+				let res = JSON.parse( xhttp.response );
+				order.secondStep.mail = res.mail;
+				order.secondStep.phone = res.phone;
+				order.secondStep.fio = res.fio;
+				order.secondStep.adress = res.adress;
+			} else {
+				wm_ajax_err();
+			}
+		}
+	}
+}
 
 document.querySelector('body').addEventListener('click', function(e){
 	if ( 
@@ -218,4 +280,15 @@ document.addEventListener('DOMContentLoaded', function(){
 	});
 	/*end  of calendar*/
 
+	if ( getCookie('water_info') ) {
+		send_id( getCookie('water_info') );
+	}
+
 });
+
+function getCookie(name) {
+	var matches = document.cookie.match(new RegExp(
+		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+	));
+	return matches ? decodeURIComponent(matches[1]) : undefined;
+}

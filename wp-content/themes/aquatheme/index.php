@@ -143,7 +143,7 @@ Template Name: Главная
 								</label>
 								<div class="card-wrap">
 									<div class="card-wrap__left">
-									 	<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction1.png" alt=""></div>
+									 	<div><img id="current-order-img" src="<?php echo get_template_directory_uri(); ?>/assets/images/direction1.png" alt=""></div>
 									 </div>
 									 <div class="card-wrap__right">
 									 	<p class="card-wrap__title">Вода <p data-wm-water-title="true">Аквастар</p></p>
@@ -194,7 +194,7 @@ Template Name: Главная
 							</div>
 							<div class="offer-item__column">
 								<p><p data-price-single></p><span> грн</span></p>
-								<p class="wm-hid"></p>
+								<p class="wm-hid" data-complect-first></p>
 							</div>
 							<div class="offer-item__column">
 								<span data-itm-count></span>
@@ -218,7 +218,7 @@ Template Name: Главная
 							</div>
 							<div class="offer-item__column">
 								<p><p data-price-single></p><span> грн</span></p>
-								<p class="wm-hid"></p>
+								<p class="wm-hid" data-complect-first></p>
 							</div>
 							<div class="offer-item__column">
 								<span data-itm-count></span>
@@ -242,7 +242,7 @@ Template Name: Главная
 							</div>
 							<div class="offer-item__column">
 								<p><p data-price-single></p><span> грн</span></p>
-								<p class="wm-hid"></p>
+								<p class="wm-hid" data-complect-first></p>
 							</div>
 							<div class="offer-item__column">
 								<span data-itm-count></span>
@@ -253,22 +253,22 @@ Template Name: Главная
 						</div>
 
 						<div class="offer-bottom">
-							<p><span>Адрес доставки:</span> Аква Стар, Виталий Попович, Панаса Мирного, 38, Мелитополь.</p>
+							<p><span>Адрес доставки: </span><span id="adress-rezult"></span></p>
 							<div>
-								<span>Итого: 90.00 грн</span>
-								<p>Всего к оплате: 90.00 грн</p>
+								<span>Итого: <p id="order-total"></p> грн</span>
+								<p>Всего к оплате: <p id="order-total2"></p> грн</p>
 							</div>
 						</div>
 					</div>
 					<div class="popup-main-button">
-						<span class="button">Подтвердить</span>
+						<span class="button" data-confirm-order="btn-3">Подтвердить</span>
 					</div>
 				</div>
 			</div>
 		</main>
 	<script>
 		let price_start = <?php echo get_field('price_start_system'); ?>;
-
+		let ajaxUrl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
 		let images = {
 			'аквастар': '<?php echo get_field('img_aqua_star'); ?>',
 			'благодатна': '<?php echo get_field('img_blago'); ?>',
