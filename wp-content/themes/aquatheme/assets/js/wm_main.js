@@ -1,5 +1,5 @@
 'use strict'
-alert(1);
+
 let order = {
 	firstStep: {
 		'аквастар':{
