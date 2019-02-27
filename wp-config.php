@@ -20,7 +20,7 @@
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
-define( 'DB_NAME', 'aqua_star' );
+define( 'DB_NAME', 'aquastar' );
 
 /** Имя пользователя MySQL */
 define( 'DB_USER', 'root' );
