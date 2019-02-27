@@ -10,6 +10,8 @@ Template Name: Главная
 		<link href="<?php echo get_template_directory_uri(); ?>/assets/libs/calendar/css/calendar.css" rel="stylesheet">
 		<link href="<?php echo get_template_directory_uri(); ?>/style.css" rel="stylesheet">
 		<?php wp_head(); ?>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src='<?=get_template_directory_uri()?>/assets/js/main.js'></script>
 	</head>
 	<body>
 		<main>
@@ -28,6 +30,17 @@ Template Name: Главная
 				<h2>Выберите направление для заказа</h2>
 				<div class="direction-list">
 					<div class="direction-item">
+						<div class="direction-item__popup">
+							<strong>Химический состав воды, мг/л:</strong>
+							<span>Калий</span>  <p>2–20</p> 
+							<span>Фтор</span><p>0,6–1,2</p>
+							<span>Кальций</span><p>25–80</p>
+							<span>Йод</span><p>0,06</p>
+							<span>Магний</span><p>5–50</p>
+							<span>HCO3</span><p>30–400</p>
+							<span>Общая минерализация</span><p>200–500 мг./л</p>
+							<span>Общая жесткость</span><p>1,5–7 мг-экв./л</p>
+						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
@@ -35,6 +48,17 @@ Template Name: Главная
 						<span class="direction-item__button">Аквастар</span>
 					</div>
 					<div class="direction-item">
+						<div class="direction-item__popup">
+							<strong>Химический состав воды, мг/л:</strong>
+							<span>Калий</span>  <p>2–20</p> 
+							<span>Фтор</span><p>0,6–1,2</p>
+							<span>Кальций</span><p>25–80</p>
+							<span>Йод</span><p>0,06</p>
+							<span>Магний</span><p>5–50</p>
+							<span>HCO3</span><p>30–400</p>
+							<span>Общая минерализация</span><p>200–500 мг./л</p>
+							<span>Общая жесткость</span><p>1,5–7 мг-экв./л</p>
+						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
@@ -42,6 +66,17 @@ Template Name: Главная
 						<span class="direction-item__button">Благодатна</span>
 					</div>
 					<div class="direction-item">
+						<div class="direction-item__popup">
+							<strong>Химический состав воды, мг/л:</strong>
+							<span>Калий</span>  <p>2–20</p> 
+							<span>Фтор</span><p>0,6–1,2</p>
+							<span>Кальций</span><p>25–80</p>
+							<span>Йод</span><p>0,06</p>
+							<span>Магний</span><p>5–50</p>
+							<span>HCO3</span><p>30–400</p>
+							<span>Общая минерализация</span><p>200–500 мг./л</p>
+							<span>Общая жесткость</span><p>1,5–7 мг-экв./л</p>
+						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>

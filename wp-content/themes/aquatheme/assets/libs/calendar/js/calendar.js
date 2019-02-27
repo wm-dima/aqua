@@ -51,8 +51,8 @@ var JustCalendar = function()
     this.constructor = function(options)
     {
         this.options = {
-            monthNames:      ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            dayNames:        ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+            monthNames:      ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            dayNames:        ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
             container:       null, // DOM element
             startDate:       new Date(),
             calendars:       1,
