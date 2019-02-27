@@ -89,20 +89,18 @@ function calculatorController(e){
 }
 
 function minusProduct(){
-	if (order.firstStep[selectedProd].count < 2) {
+	if (order.firstStep[selectedProd].count <= 1) {
 		return;
 	}
 	priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
 	--order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
-	--order.firstStep[selectedProd].count;
 }
 
 function addProduct(){
 	priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
 	++order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
-	++order.firstStep[selectedProd].count;
 }
 
 function toggleFirstTimeComplect(theLabel){
