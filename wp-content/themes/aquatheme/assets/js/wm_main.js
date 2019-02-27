@@ -3,21 +3,23 @@
 let order = {
 	firstStep: {
 		'аквастар':{
-			count: 1
+			count: null,
+			firstTimeComplect: true
 		},
 		'благодатна':{
-			count: 1
+			count: null,
+			firstTimeComplect: true
 		},
 		'магазин':{
-			count: 1
+			count: null,
+			firstTimeComplect: true
 		}
 	},
 	secondStep: {
 		mail: null,
 		phone: null,
 		fio: null,
-		adress: null,
-		firstTimeComplect: true
+		adress: null
 	}
 };
 
@@ -65,10 +67,23 @@ document.querySelector('.popup.popup2').addEventListener('click', function(e){
 	if (e.target.getAttribute('data-wm-go') == 'step-3') {
 		document.querySelector('[data-wm-order="save"]').click();
 		if (isValidStep2()) {
+			preparePopUp2();
 			showPopUp(2);
 		};
 	}
 });
+
+function preparePopUp2(){
+	Object.keys(order.firstStep).forEach(function(item, i){
+		if ( order.firstStep[item].count != null ) {
+			let itemRow = document.querySelector('[data-wm-name="' + item + '"]');
+			itemRow.classList.remove('wm-hid');
+			itemRow.querySelector('[data-price-single]').innerText = priceListSystem[item];
+			itemRow.querySelector('[data-itm-count]').innerText = order.firstStep[item].count;
+			itemRow.querySelector('[data-price-total]').innerText = ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 );
+		}
+	});
+}
 
 function isValidStep2(){
 	let valid = true;
@@ -93,24 +108,32 @@ function minusProduct(){
 		return;
 	}
 	priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
-	--order.firstStep[selectedProd].count;
+	try{
+		--order.firstStep[selectedProd].count;
+	} catch (e){
+		order.firstStep[selectedProd].count = 1;
+	}
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
 
 function addProduct(){
 	priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
-	++order.firstStep[selectedProd].count;
+	try{
+		++order.firstStep[selectedProd].count;
+	} catch (e){
+		order.firstStep[selectedProd].count = 1;
+	}
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
 
 function toggleFirstTimeComplect(theLabel){
 	if ( theLabel.classList.contains('before-none') ) {
 		theLabel.classList.remove('before-none');
-		order.secondStep.firstTimeComplect = true;
+		order.firstStep[selectedProd].firstTimeComplect = true;
 		priceNode.innerText = priceNode.innerText * 1 + price_start * 1;
 	} else {
 		theLabel.classList.add('before-none');
-		order.secondStep.firstTimeComplect = false;
+		order.firstStep[selectedProd].firstTimeComplect = false;
 		priceNode.innerText = priceNode.innerText * 1 - price_start * 1;
 	}
 }
@@ -184,6 +207,7 @@ document.querySelector('body').addEventListener('click', function(e){
 		document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
 	}
 });
+
 document.addEventListener('DOMContentLoaded', function(){
 
 	/*calendar*/
