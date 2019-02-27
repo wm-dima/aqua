@@ -30,21 +30,21 @@ Template Name: Главная
 					<div class="direction-item">
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction1.png" alt=""></div>
+							<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Аквастар</span>
 					</div>
 					<div class="direction-item">
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction2.png" alt=""></div>
+							<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Благодатна</span>
 					</div>
 					<div class="direction-item">
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction3.png" alt=""></div>
+							<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Магазин</span>
 					</div>
@@ -122,7 +122,7 @@ Template Name: Главная
 									 		</div>
 									 	</div>
 									 </div>
-									 <p class="card-wrap__total">Общая сумма:<span></span></p> 
+									 <p class="card-wrap__total">Общая сумма:<span></span> грн</p> 
 								</div>
 							</div>
 						</div>
@@ -144,50 +144,79 @@ Template Name: Главная
 							<div class="offer-header__item">Кол-во</div>
 							<div class="offer-header__item">Сумма</div>
 						</div>
-						<div class="offer-item">
+
+						<div class="offer-item wm-hid" data-wm-name="аквастар">
 							<div class="offer-item__column">
 								<div class="offer-item__img">
-									<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction1.png" alt=""></div>
+									<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="offer-item__column">
 								<div>
 									<h3>Вода “AQUASTAR”</h3>
-									<p>Дата доставки: 02.02.2019</p>
+									<p>Дата доставки: <p data-delivery-date></p></p>
 								</div>
 							</div>
 							<div class="offer-item__column">
-								<p>45.00<span>грн</span></p>
+								<p><p data-price-single></p><span> грн</span></p>
+								<p class="wm-hid"></p>
 							</div>
 							<div class="offer-item__column">
-								<span>3</span>
+								<span data-itm-count></span>
 							</div>
 							<div class="offer-item__column">
-								<p>45.00 <span>грн</span></p>
+								<p><p data-price-total></p><span> грн</span></p>
 							</div>
 						</div>
-						<div class="offer-item">
+
+						<div class="offer-item wm-hid" data-wm-name="благодатна">
 							<div class="offer-item__column">
 								<div class="offer-item__img">
-									<div><img src="<?php echo get_template_directory_uri(); ?>/assets/images/direction1.png" alt=""></div>
+									<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="offer-item__column">
 								<div>
-									<h3>Вода “AQUASTAR”</h3>
-									<p>Дата доставки: 02.02.2019</p>
+									<h3>Вода “БЛАГОДАТНАЯ”</h3>
+									<p>Дата доставки: <p data-delivery-date></p></p>
 								</div>
 							</div>
 							<div class="offer-item__column">
-								<p>45.00<span>грн</span></p>
+								<p><p data-price-single></p><span> грн</span></p>
+								<p class="wm-hid"></p>
 							</div>
 							<div class="offer-item__column">
-								<span>3</span>
+								<span data-itm-count></span>
 							</div>
 							<div class="offer-item__column">
-								<p>45.00 <span>грн</span></p>
+								<p><p data-price-total></p><span> грн</span></p>
 							</div>
 						</div>
+
+						<div class="offer-item wm-hid" data-wm-name="магазин">
+							<div class="offer-item__column">
+								<div class="offer-item__img">
+									<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
+								</div>
+							</div>
+							<div class="offer-item__column">
+								<div>
+									<h3>Вода “МАГАЗИН”</h3>
+									<p>Дата доставки: <p data-delivery-date></p></p>
+								</div>
+							</div>
+							<div class="offer-item__column">
+								<p><p data-price-single></p><span> грн</span></p>
+								<p class="wm-hid"></p>
+							</div>
+							<div class="offer-item__column">
+								<span data-itm-count></span>
+							</div>
+							<div class="offer-item__column">
+								<p><p data-price-total></p><span> грн</span></p>
+							</div>
+						</div>
+
 						<div class="offer-bottom">
 							<p><span>Адрес доставки:</span> Аква Стар, Виталий Попович, Панаса Мирного, 38, Мелитополь.</p>
 							<div>
@@ -205,17 +234,24 @@ Template Name: Главная
 	<script>
 		let price_start = <?php echo get_field('price_start_system'); ?>;
 
+		let images = {
+			'аквастар': '<?php echo get_field('img_aqua_star'); ?>',
+			'благодатна': '<?php echo get_field('img_blago'); ?>',
+			'магазин': '<?php echo get_field('img_shop'); ?>'
+		};
+
 		let priceListSystem = {
 			'аквастар': <?php echo get_field('price_single_system_aq_star'); ?>,
 			'благодатна': <?php echo get_field('price_single_system_blago'); ?>,
 			'магазин': <?php echo get_field('price_single_system_shop'); ?>
-		}
+		};
 
 		let priceListClient = {
 			'аквастар': '<?php echo get_field('price_single_aq_star'); ?>',
 			'благодатна': '<?php echo get_field('price_single_blago'); ?>',
 			'магазин': '<?php echo get_field('price_single_shop'); ?>'
-		}
+		};
+
 	</script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/app.js"></script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/wm_main.js"></script>
