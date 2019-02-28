@@ -19,10 +19,14 @@ let order = {
 		mail: null,
 		phone: null,
 		fio: null,
-		adress: null
+		adress: null,
+		time: null,
+		day: null,
+		month: null
 	}
 };
 
+let selectTimeHid = true;
 let totalOrder = [];
 let formStep2Valid = false;
 let priceNode = document.querySelector('.card-wrap__total span');
@@ -42,11 +46,25 @@ document.querySelector('.popup.popup1').addEventListener('click', function(e){
 		document.querySelector('[data-wm-water-title]').innerText = e.target.innerText;
 		document.querySelector('#current-order-img').src = images[name];
 		document.querySelector('[data-wm-s2-prices]').innerText = priceListClient[selectedProd];
+		document.querySelector('[data-calc-attr="count"]').innerText = order.firstStep[selectedProd].count;
+
 		priceNode.innerText = price_start + priceListSystem[selectedProd];
 		fillForm();
+		fillDate();
 		showPopUp(1);
 	}
 });
+
+function fillDate(){
+	if ( order.secondStep.time != null ) {
+		document.querySelector('.when-select__item.when-select__item--active').innerText = order.secondStep.time;
+		document.querySelector('.wm-select-time').classList.add('wm-hid');
+		console.log('hid');
+
+		selectTimeHid = true;
+	}
+
+}
 
 function fillForm(){
 	let form = document.querySelector('#contact_form');
@@ -67,14 +85,38 @@ document.querySelector('.popup.popup2').addEventListener('click', function(e){
 	if (e.target.hasAttribute('data-calc-attr')) {
 		calculatorController(e);
 	}
+	if (e.target.closest('data-calendar-count')) {
+		order.secondStep.day = e.target.closest('data-calendar-count').getAttribute('data-calendar-count');
+		order.secondStep.month = e.target.closest('.jajc-calendar').querySelector('.month-name').getAttribute('data-month');
+	}
+	if (e.target.closest('data-calendar-count-next')) {
+		order.secondStep.day = e.target.closest('data-calendar-count-next').getAttribute('data-calendar-count-next');
+		// let nextMonth = e.target.closest('.jajc-calendar').querySelector('.month-name').innerText;
+		order.secondStep.month = e.target.closest('.jajc-calendar').querySelector('.month-name').getAttribute('data-next-month');
+	}
+	if (e.target.closest('.when-select__item')) {
+		document.querySelector('.when-select__item.when-select__item--active').innerText = e.target.innerText;
+		order.secondStep.time = e.target.innerText;
+	}
+	if (e.target.closest('.when-select__item.when-select__item--active')) {
+		document.querySelector('.wm-select-time').classList.toggle('wm-hid');
+		console.log('toggle');
+
+		selectTimeHid = !selectTimeHid;
+	}
 	if (e.target.getAttribute('data-wm-go') == 'step-3') {
 		document.querySelector('[data-wm-order="save"]').click();
 		if (isValidStep2()) {
+		// if ( formStep2Valid && dataIsPicked() ) {
 			preparePopUp2();
 			showPopUp(2);
 		};
 	}
 });
+
+function dataIsPicked(){
+
+}
 
 document.querySelector('.popup.popup3').addEventListener('click', function(e){
 	if ( e.target.getAttribute('data-confirm-order') == "btn-3" ) {
@@ -150,7 +192,7 @@ function isValidStep2(){
 function calculatorController(e){
 	if (e.target.getAttribute('data-calc-attr') == 'add') {
 		addProduct();
-	} else {
+	} else if ( e.target.getAttribute('data-calc-attr') == 'minus' ) {
 		minusProduct();
 	}
 }
@@ -268,6 +310,11 @@ document.querySelector('body').addEventListener('click', function(e){
 	) {
 		document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
 	}
+	if ( !selectTimeHid && e.target.closest('.wm-select-time') == null ) {
+		document.querySelector('.wm-select-time').classList.add('wm-hid');
+		console.log('hid');
+		selectTimeHid = true;
+	}
 });
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -283,6 +330,10 @@ document.addEventListener('DOMContentLoaded', function(){
 	if ( getCookie('water_info') ) {
 		send_id( getCookie('water_info') );
 	}
+
+	let date = new Date();
+	let theDay = date.getDate();
+
 
 });
 

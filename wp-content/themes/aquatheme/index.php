@@ -122,7 +122,7 @@ Template Name: Главная
 									<p class="when-wrap__title">ВРЕМЯ ДОСТАВКИ</p>
 									<div class="when-select-wrap">
 										<p class="when-select__item when-select__item--active">08:00-09:00</p>
-										<div>
+										<div class="wm-select-time">
 											<p class="when-select__item">09:00-10:00</p>
 											<p class="when-select__item">10:00-11:00</p>
 											<p class="when-select__item">11:00-12:00</p>

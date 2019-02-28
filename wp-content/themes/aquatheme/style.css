@@ -20,3 +20,16 @@ p[data-wm-water-title] {
 .wm-hid {
 	display: none !important;
 }
+
+@media screen and ( max-width: 1700px ) {
+ body {
+ zoom: 0.9;
+ }
+}
+
+@media screen and ( max-width: 1500px ) {
+ body {
+ zoom: 0.8;
+ }
+}
+
