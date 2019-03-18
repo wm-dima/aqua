@@ -205,8 +205,6 @@ Template Name: Главная
 									</div>
 								</div>
 								<div class="calendar-wrap">
-									<!-- <span id="calendar-btn-next"></span> -->
-									<!-- <span id="calendar-btn-previous"></span> -->
 									<div id="calendar"></div>
 								</div>
 							</div>
@@ -379,6 +377,27 @@ Template Name: Главная
 					</div>
 				</div>
 			</div>
+			<!-- start of new pop-up -->
+			<div class="popup-wrap popup-catalog-wrap">
+				<div class="popup popup-catalog">
+					<div class="popup-close"></div>
+					<p data-catalog-back>тебе кончили на зад! - когда? - 5 минут назад.</p>
+					<p data-catalog-support>Поддержка члена импотента.</p>
+					<a href="<?php echo get_field('price_list'); ?>" download>Фонд социальной помощи убогим от меня.</a>
+				</div>
+			</div>
+
+			<div class="popup-wrap popup-support-wrap">
+				<div class="popup popup-support">
+					<div class="popup-close"></div>
+					<p data-catalog-support>
+						Поддержка члена импотента.
+						<h1>Поддерживали и не такое</h1>
+					</p>
+					<p data-support-back>назад</p>
+				</div>
+			</div>
+			<!-- end of new pop-up -->
 		</main>
 	<script>
 		let price_start = <?php echo get_field('price_start_system'); ?>;

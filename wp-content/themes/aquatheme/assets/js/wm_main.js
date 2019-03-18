@@ -139,6 +139,8 @@ function showPopUp(number) {
 	if ( number == 0 ) resetOrder();
 	if ( selectedProd == 'магазин' ) {
 		document.querySelector('.form-item__wrap .form-item__packet').classList.add('wm-hid');
+		showCatalor();
+		return;
 	} else {
 		document.querySelector('.form-item__wrap .form-item__packet').classList.remove('wm-hid');
 	}
@@ -147,6 +149,16 @@ function showPopUp(number) {
 		document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
 	} catch (e){}
 	document.querySelectorAll('.popup-wrap')[number].classList.add('popup-wrap--active');
+}
+
+function showCatalor(){
+	document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
+	document.querySelector('.popup-catalog-wrap').classList.add('popup-wrap--active');
+}
+
+function showSupport(){
+	document.querySelector('.popup-wrap--active').classList.remove('popup-wrap--active');
+	document.querySelector('.popup-support-wrap').classList.add('popup-wrap--active');
 }
 
 class Min {
@@ -643,13 +655,21 @@ document.querySelector('#pay-cart').addEventListener('click', function(e){
 	order.secondStep.payCart = !order.secondStep.payCart;
 })
 
-// document.querySelector('#calendar-btn-previous').addEventListener('click', function(e){
-// 	document.querySelector('td.calendar-btn.btn-prev > span').click();
-// 	setTimeout(disabledDays, 200);
-// })
+document.querySelector('.popup-catalog').addEventListener('click', function(e){
+	if (e.target.closest('[data-catalog-back]')) {
+		selectedProd = null;
+		showPopUp(0);
+		return;
+	}
+	if (e.target.closest('[data-catalog-support]')) {
+		showSupport();
+		return;
+	}
+})
 
-// document.querySelector('#calendar-btn-next').addEventListener('click', function(e){
-// 	document.querySelector('td.calendar-btn.btn-next > span').click();
-// 	setTimeout(disabledDays, 200);
-// })
-
+document.querySelector('.popup-support').addEventListener('click', function(e){
+	if (e.target.closest('[data-support-back]')) {
+		showCatalor();
+		return;
+	}
+})

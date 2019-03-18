@@ -68,7 +68,7 @@ function order_process(){
 			$exit = false;
 			$order .= '      вода "'. mb_strtoupper ($key) . '" (' . $value['count'] . ' шт)';
 			if ( $value['firstTimeComplect'] ) {
-				$order .= ' + комплект на первый раз (1 бутыль воды бесплатно)';
+				$order .= ' + Стартовый комплект (бутыль+помпа)';
 			}
 			$order .= '.';
 		}
