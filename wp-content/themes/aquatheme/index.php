@@ -49,7 +49,7 @@ Template Name: Главная
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
 						</div>
-						<span class="direction-item__button">Аквастар</span>
+						<span class="direction-item__button" data-name="Аквастар">АКВА СТАР</span>
 					</div>
 					<div class="direction-item">
 						<div class="direction-item__popup">
@@ -67,7 +67,7 @@ Template Name: Главная
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
 						</div>
-						<span class="direction-item__button">Благодатна</span>
+						<span class="direction-item__button" data-name="Благодатна">Благодатна</span>
 					</div>
 					<div class="direction-item">
 						<div class="direction-item__popup">
@@ -85,7 +85,7 @@ Template Name: Главная
 						<div class="direction-item__img">
 							<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
 						</div>
-						<span class="direction-item__button">Магазин</span>
+						<span class="direction-item__button" data-name="Магазин">Магазин</span>
 					</div>
 				</div>
 
@@ -108,7 +108,7 @@ Template Name: Главная
 				    			<div class="direction-item__img">
 				    				<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
 				    			</div>
-				    			<span class="direction-item__button">Аквастар</span>
+				    			<span class="direction-item__button" data-name="Аквастар">АКВА СТАР</span>
 				    		</div>
 				    	</div>
 				    	<div class="swiper-slide">
@@ -128,7 +128,7 @@ Template Name: Главная
 				    			<div class="direction-item__img">
 				    				<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
 				    			</div>
-				    			<span class="direction-item__button">Благодатна</span>
+				    			<span class="direction-item__button" data-name="Благодатна">Благодатна</span>
 				    		</div>
 				    	</div>
 				    	<div class="swiper-slide">
@@ -148,7 +148,7 @@ Template Name: Главная
 				    			<div class="direction-item__img">
 				    				<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
 				    			</div>
-				    			<span class="direction-item__button">Магазин</span>
+				    			<span class="direction-item__button" data-name="Магазин">Магазин</span>
 				    		</div>
 				    	</div>
 				    </div>
@@ -183,7 +183,7 @@ Template Name: Главная
 										<label>Email</label>
 										<input type="text" name="mail" data-wm-type="mail" id="" value='Информация' placeholder="Информация">
 									</div>
-									<input type="submit" data-wm-order='save' value="СОХРАНИТЬ">	
+									<input type="submit" data-wm-order='save' value="СОХРАНИТЬ" class="wm-hid">	
 								</form>
 							</div>
 						</div>
@@ -205,6 +205,8 @@ Template Name: Главная
 									</div>
 								</div>
 								<div class="calendar-wrap">
+									<!-- <span id="calendar-btn-next"></span> -->
+									<!-- <span id="calendar-btn-previous"></span> -->
 									<div id="calendar"></div>
 								</div>
 							</div>
@@ -264,18 +266,21 @@ Template Name: Главная
 							</div>
 							<div class="offer-item__column">
 								<div>
-									<h3>Вода “AQUASTAR”</h3>
+									<h3>Вода “АКВА СТАР”</h3>
 									<p>Дата доставки: <p data-delivery-date></p></p>
 									<p class="wm-hid" data-complect-first>Бутыль + помпа</p>
 								</div>
 							</div>
 							<div class="offer-item__column">
-								<p><p data-price-single></p><span> грн</span></p>
+								<strong>Цена:</strong>
+								<p><p data-price-single></p><span>&nbsp грн</span></p>
 							</div>
 							<div class="offer-item__column">
+								<strong>Количество:</strong>
 								<span data-itm-count></span>
 							</div>
 							<div class="offer-item__column">
+								<strong>Итог:</strong>
 								<p><p data-price-total></p><span> грн</span></p>
 							</div>
 						</div>
@@ -294,13 +299,22 @@ Template Name: Главная
 								</div>
 							</div>
 							<div class="offer-item__column">
-								<p><p data-price-single></p><span> грн</span></p>
+								<strong>Цена:</strong>
+								<p>
+									<p data-price-single></p>
+									<span> грн</span>
+								</p>
 							</div>
 							<div class="offer-item__column">
+								<strong>Количество:</strong>
 								<span data-itm-count></span>
 							</div>
 							<div class="offer-item__column">
-								<p><p data-price-total></p><span> грн</span></p>
+								<strong>Итог:</strong>
+								<p>
+									<p data-price-total></p>
+									<span> грн</span>
+								</p>
 							</div>
 						</div>
 
@@ -318,12 +332,16 @@ Template Name: Главная
 								</div>
 							</div>
 							<div class="offer-item__column">
+								<strong>Цена:</strong>
 								<p><p data-price-single></p><span> грн</span></p>
 							</div>
 							<div class="offer-item__column">
+								<strong>Количество:</strong>
 								<span data-itm-count></span>
+								<span> шт.</span>
 							</div>
 							<div class="offer-item__column">
+								<strong>Итог:</strong>
 								<p><p data-price-total></p><span> грн</span></p>
 							</div>
 						</div>
@@ -331,6 +349,11 @@ Template Name: Главная
 						<div class="offer-bottom">
 							<p><span>Адрес доставки: </span><span id="adress-rezult"></span></p>
 							<div>
+								<label>Оплатить картой 
+									<div id="pay-cart">
+										<div data-pay-cart class="pay-cart-not-active"></div>
+									</div>
+								</label>
 								<span>Итого: <span id="order-total"></span> грн</span>
 								<p>Всего к оплате: <span id="order-total2"></span> грн</p>
 							</div>
@@ -339,8 +362,8 @@ Template Name: Главная
 					<div class="popup-main-button">
 						<span class="button--back" data-confirm-order-back><strong>Вернуться</strong> назад</span>
 						<span class="button" data-confirm-order="btn-3">
-							Оплатить
-							<div id="pay-btn" class="wm-hid"></div>
+							Заказать
+							<!-- <div id="pay-btn" class="wm-hid"></div> -->
 						</span>
 					</div>
 				</div>
@@ -349,7 +372,11 @@ Template Name: Главная
 				<div class="popup popup4">
 					<div class="popup-close"></div>
 					<h2>Спасибо за заказ!</h2>
-					<span class='button' data-close-thenk>НА ГЛАВНУЮ</a>
+					<div class="buttons">
+						<span class='button' data-close-thenk>НА ГЛАВНУЮ</span>
+						<div class="button" id="pay-btn" class="wm-hid">Оплатить</div>
+						<div id="pay-btn--hid" class="wm-hid"></div>
+					</div>
 				</div>
 			</div>
 		</main>
@@ -386,18 +413,18 @@ Template Name: Главная
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/libs/calendar/js/calendar.js"></script>
 
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/swiper/swiper.min.js"></script>
-	<link rel="stylesheet" href=<?php echo get_template_directory_uri(); ?>/swiper/swiper.min.css">
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/swiper/swiper.min.css">
 	<script>
 		var mySwiper = new Swiper('.swiper-container', {
-    loop: true,
-    speed: 400,
-    observer: true,
-    autoHeight: true,
-      navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
+		    loop: true,
+		    speed: 400,
+		    observer: true,
+		    autoHeight: true,
+		      navigation: {
+		    nextEl: '.swiper-button-next',
+		    prevEl: '.swiper-button-prev',
+		  },
+		});
 	</script>
 </body>
 </html>

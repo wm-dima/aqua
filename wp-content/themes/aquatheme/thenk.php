@@ -17,7 +17,7 @@ Template Name: Спасибо
   		<style>html{margin-top: 0px !important}</style>
 	</head>
 	<body>
-		<main>
+		<main class='main--active'>
 			<div class="blur"></div>
 			<div class="main-screen">
 				<div class="logo"><img src="<?php echo get_field('logo', 7); ?>" alt=""></div>

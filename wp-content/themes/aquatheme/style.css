@@ -94,6 +94,10 @@ body {
 	zoom: 1;
 }
 
+.popup3 h2 {
+	padding: 0px;
+	margin-bottom: 20px;
+}
 .popup h2 {
 	font-size: 26px;
 }
@@ -221,4 +225,13 @@ p[data-wm-water-title] {
 }
 .disabled-day span:hover{
 	color: #d0cece !important;
+}
+
+.pay-cart-not-active{
+	display: none;
+}
+
+[data-delivery-date]{
+    font-weight: 600;
+    color: black;
 }

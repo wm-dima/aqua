@@ -106,7 +106,6 @@ function updateTime(e){
 		(e.target.innerText == '6:00-8:00' || e.target.innerText == '8:00-11:00')
 	) return;
 	order.secondStep.time = e.target.innerText;
-	console.log(order.secondStep.time);
 	document.querySelector('.when-select__item').innerText = e.target.innerText;
 	try {
 		document.querySelector('.selected-time-error').classList.remove('selected-time-error');
@@ -155,16 +154,13 @@ class Min {
 		this.step2Controller(e);
 	}
 	step2Controller(e){
-		console.log('miniClickNumber, miniLastStep', miniClickNumber, miniLastStep);
 		if (miniClickNumber == 0){ //показал воду
-			console.log('cond 1');
 			this.showStep2part(0);
 			miniClickNumber = 1;
 			miniLastStep = false;
 			return;
 		}
 		if ( miniClickNumber == 1 && order.secondStep.day != null && order.secondStep.time != null ) { // показал дату
-			console.log('cond 2');
 			this.showStep2part(1);
 			miniClickNumber = 2;
 			miniLastStep = false;
@@ -172,7 +168,6 @@ class Min {
 			return;
 		}
 		if (miniClickNumber == 2) { // показал форму
-			console.log('cond 3');
 			this.showStep2part(2);
 			miniLastStep = true;
 			if (firstClick) {
@@ -194,21 +189,17 @@ class Min {
 		document.querySelector('[data-second-step="'+number+'"]').classList.remove('wm-min-hid');
 	}
 	stepBackController(e){
-		console.log(miniClickNumber);
 		if ( miniClickNumber == 1 ) {
-			console.log('stepBackController cond 1');
 			showPopUp(0);
 			miniClickNumber = 0;
 			return;
 		}
 		if ( miniClickNumber == 2 && firstClick ) {
-			console.log('stepBackController cond 2');
 			miniClickNumber = 0;
 			this.step2Controller();
 			return;
 		}
 		if ( miniClickNumber == 2 && !firstClick ) {
-			console.log('stepBackController cond 3');
 			miniClickNumber = 1;
 			this.step2Controller();
 			return;
@@ -299,7 +290,8 @@ document.querySelector('[data-wm-order]').addEventListener('click', function(e){
 function selectWaterType(e){
 	// document.querySelector('label.form-item__packet').classList.remove('before-none');
 
-	let name = e.target.innerText.toLowerCase();
+	let name = e.target.getAttribute('data-name').toLowerCase();
+	// let name = e.target.innerText.toLowerCase();
 	selectedProd = name;
 	order.firstStep[selectedProd].count === null ? order.firstStep[selectedProd].count = 1 : '' ; 
 	document.querySelector('[data-wm-water-title]').innerText = e.target.innerText;
@@ -423,12 +415,17 @@ function toggleFirstTimeComplect(theLabel){
 	if ( theLabel.classList.contains('before-none') ) {
 		theLabel.classList.remove('before-none');
 		order.firstStep[selectedProd].firstTimeComplect = true;
-		priceNode.innerText = (priceNode.innerText * 1 + price_start * 1) - priceListSystem[selectedProd] * 1;
+
+		priceNode.innerText = ( price_start * order.firstStep[selectedProd].count );
+
+	// priceNode.innerText = (priceNode.innerText * 1 + price_start * 1) - priceListSystem[selectedProd] * 1;
 		document.querySelector('#current-order-img').src = imagesPompa[selectedProd];
 	} else {
 		theLabel.classList.add('before-none');
 		order.firstStep[selectedProd].firstTimeComplect = false;
-		priceNode.innerText = (priceNode.innerText * 1 - price_start * 1) + priceListSystem[selectedProd] * 1;
+		priceNode.innerText = ( priceListSystem[selectedProd] * order.firstStep[selectedProd].count );
+
+		// priceNode.innerText = (priceNode.innerText * 1 - price_start * 1) +  * 1;
 		document.querySelector('#current-order-img').src = images[selectedProd];
 	}
 }
@@ -445,13 +442,21 @@ function minusProduct(){
 	if (order.firstStep[selectedProd].count <= 1) {
 		return;
 	}
-	priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
+	if (order.firstStep[selectedProd].firstTimeComplect) {
+		priceNode.innerText = priceNode.innerText * 1 - price_start * 1;
+	} else {
+		priceNode.innerText = priceNode.innerText * 1 - priceListSystem[selectedProd] * 1;
+	}
 	--order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
 
 function addProduct(){
-	priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
+	if (order.firstStep[selectedProd].firstTimeComplect) {
+		priceNode.innerText = priceNode.innerText * 1 + price_start * 1;
+	} else {
+		priceNode.innerText = priceNode.innerText * 1 + priceListSystem[selectedProd] * 1;
+	}
 	++order.firstStep[selectedProd].count;
 	calcCount.innerText = order.firstStep[selectedProd].count;
 }
@@ -504,26 +509,35 @@ function preparePopUp2(){
 			deliveryTime += ( monthView < 10 ? '' + 0 + monthView : monthView );
 			deliveryTime += ')';
 			itemRow.querySelector('[data-delivery-date]').innerText = deliveryTime;
+			itemRow.querySelector('[data-itm-count]').innerText = order.firstStep[item].count;
 			let priceSingle = itemRow.querySelector('[data-price-single]');
 			let priceTotal = itemRow.querySelector('[data-price-total]');
-			priceSingle.innerText = priceListSystem[item];
-			priceTotal.innerText = ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 );
-			itemRow.querySelector('[data-itm-count]').innerText = order.firstStep[item].count;
 			if ( order.firstStep[item].firstTimeComplect ) {
-				itemRow.querySelector('[data-complect-first]').classList.remove('wm-hid');
 				itemRow.querySelector('.offer-item__img img').src = imagesPompa[item];
-				itemRow.querySelector('[data-itm-count]').innerText 
-					=
-				order.firstStep[item].count == 1 ?'1': order.firstStep[item].count - 1 + ' + 1';
-				if (order.firstStep[item].count > 1) {
-					priceSingle.innerText = priceListSystem[item] + ' / '+ price_start;
-					priceTotal.innerText = priceTotal.innerText - priceListSystem[item];
-					priceTotal.innerText = priceTotal.innerText + ' + ' + price_start;
-				} else {
-					priceSingle.innerText = price_start;
-					priceTotal.innerText = price_start ;
-				}
+				priceSingle.innerText = price_start;
+				priceTotal.innerText = order.firstStep[item].count * price_start;
+			} else {
+				priceSingle.innerText = priceListSystem[item];
+				priceTotal.innerText = order.firstStep[item].count * priceListSystem[item]; 
 			}
+			// priceSingle.innerText = priceListSystem[item];
+			// priceTotal.innerText = ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 );
+			// itemRow.querySelector('[data-itm-count]').innerText = order.firstStep[item].count;
+			// if ( order.firstStep[item].firstTimeComplect ) {
+			// 	itemRow.querySelector('[data-complect-first]').classList.remove('wm-hid');
+			// 	itemRow.querySelector('.offer-item__img img').src = imagesPompa[item];
+			// 	itemRow.querySelector('[data-itm-count]').innerText 
+			// 		=
+			// 	order.firstStep[item].count == 1 ?'1': order.firstStep[item].count - 1 + ' + 1';
+			// 	if (order.firstStep[item].count > 1) {
+			// 		priceSingle.innerText = priceListSystem[item] + ' / '+ price_start;
+			// 		priceTotal.innerText = priceTotal.innerText - priceListSystem[item];
+			// 		priceTotal.innerText = priceTotal.innerText + ' + ' + price_start;
+			// 	} else {
+			// 		priceSingle.innerText = price_start;
+			// 		priceTotal.innerText = price_start ;
+			// 	}
+			// }
 		} else {
 			let itemRow = document.querySelector('[data-wm-name="' + item + '"]').classList.add('wm-hid');;
 		}
@@ -537,12 +551,12 @@ function updateOrderTotalPrice(){
 	Object.keys(order.firstStep).forEach(function(item, i){
 		if ( order.firstStep[item].count != null ) {
 			if ( order.firstStep[item].firstTimeComplect ) {
-				totalOrder.push( price_start );
-				totalOrder.push( -priceListSystem[item] );
+				totalOrder.push( price_start * 1 * ( order.firstStep[item].count * 1 ) );
+			} else {
+				totalOrder.push( ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 ) );
 			}
-			totalOrder.push( ( order.firstStep[item].count * 1 ) * ( priceListSystem[item] * 1 ) );
 		}
-	})
+	});
 	let sum = 0;
 	for(let i = 0; i < totalOrder.length; i++){
 	    sum += totalOrder[i] * 1;
@@ -631,13 +645,11 @@ document.querySelector('#pay-cart').addEventListener('click', function(e){
 
 // document.querySelector('#calendar-btn-previous').addEventListener('click', function(e){
 // 	document.querySelector('td.calendar-btn.btn-prev > span').click();
-// 	console.log('prev');
 // 	setTimeout(disabledDays, 200);
 // })
 
 // document.querySelector('#calendar-btn-next').addEventListener('click', function(e){
 // 	document.querySelector('td.calendar-btn.btn-next > span').click();
-// 	console.log('next');
 // 	setTimeout(disabledDays, 200);
 // })
 

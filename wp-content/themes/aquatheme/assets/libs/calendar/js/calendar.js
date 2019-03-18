@@ -83,6 +83,7 @@ var JustCalendar = function()
             this.options.startDate.setDate(1);
         }
         this.render();
+        
     };
 
     /**
@@ -255,6 +256,7 @@ var JustCalendar = function()
         monthTd.setAttribute("colspan", "5");
         monthTd.setAttribute("data-month", this.options.monthNames[date.getMonth()] );
         monthTd.setAttribute("data-next-month", this.options.monthNames[date.getMonth() + 1] );
+        monthTd.setAttribute("data-year", date.getFullYear() );
         monthTd.innerHTML = this.options.monthNames[date.getMonth()] + " - " + date.getFullYear();
         firstTr.appendChild(prevTd);
         firstTr.appendChild(monthTd);
