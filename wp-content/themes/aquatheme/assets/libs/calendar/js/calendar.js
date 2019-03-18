@@ -10,6 +10,9 @@
  * 
  * @constructor
  */
+var countScope = 0;
+var countNextMonth = 0;
+var currenMonth = 0;
 var JustCalendarException = function() 
 {
     /**
@@ -154,6 +157,9 @@ var JustCalendar = function()
      */
     this.previous = function()
     {
+        window.countScope = 0;
+        window.countNextMonth = 0;
+        --window.currenMonth;
         this.date.setMonth(this.date.getMonth() - this.options.calendars);
         return this.render();
     };
@@ -165,6 +171,9 @@ var JustCalendar = function()
      */
     this.next = function()
     {
+        window.countScope = 0;
+        window.countNextMonth = 0;
+        ++window.currenMonth;
         this.date.setMonth(this.date.getMonth() + this.options.calendars);
         return this.render();
     };
@@ -244,6 +253,8 @@ var JustCalendar = function()
 
         monthTd.setAttribute("class", "month-name");
         monthTd.setAttribute("colspan", "5");
+        monthTd.setAttribute("data-month", this.options.monthNames[date.getMonth()] );
+        monthTd.setAttribute("data-next-month", this.options.monthNames[date.getMonth() + 1] );
         monthTd.innerHTML = this.options.monthNames[date.getMonth()] + " - " + date.getFullYear();
         firstTr.appendChild(prevTd);
         firstTr.appendChild(monthTd);
@@ -410,6 +421,7 @@ var JustCalendarCell = function()
      */
     this.render = function ()
     {
+
         if (!this.element) {
             var container  = document.createElement('div');
             var span       = document.createElement('span');
@@ -418,7 +430,13 @@ var JustCalendarCell = function()
             container.appendChild(span);
             
             if (this.inScope) {
-                container.setAttribute('class', 'scope')
+                ++window.countScope;
+                container.setAttribute('class', 'scope');
+                container.setAttribute('data-calendar-count', window.countScope);
+            } else if ( window.countScope > 20 ) {
+				++window.countNextMonth;
+                container.setAttribute('class', 'scope');
+                container.setAttribute('data-calendar-count-next', window.countNextMonth);
             }
             
             if (this.options.onRender instanceof Function) {

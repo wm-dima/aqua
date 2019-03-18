@@ -13,8 +13,9 @@ p[data-wm-water-title] {
     display: none !important;
 }
 
-.wm-form-error{
-	border: 1px solid red;
+.wm-form-error,
+.selected-time-error {
+	border-bottom: 1px solid red !important;
 }
 
 .wm-hid {
@@ -29,7 +30,195 @@ p[data-wm-water-title] {
 
 @media screen and ( max-width: 1500px ) {
  body {
- zoom: 0.8;
+ zoom: 0.75 !important;
  }
 }
 
+@media screen and ( max-width: 1300px ) {
+ body {
+ zoom: 0.7 !important;
+ }
+}
+
+.swiper-container {
+	display: none;
+}
+@media screen and ( max-width: 1200px ) {
+
+	body {
+		zoom: 1 !important;
+	}
+.swiper-container {
+	display: block;
+	width: 100%;
+}
+.direction-list {
+	display: none;
+}
+
+
+.swiper-slide .direction-item {
+	width: 100%;
+	margin: 0px auto;
+}
+
+.popup1 h2 {
+	margin-bottom: 50px;
+}
+
+.popup-wrap {
+	position: absolute !important;
+	top: 0px !important;
+	height: auto !important;
+	left: 0px !important;
+	top: 0px !important;
+}
+
+.popup {
+	border: none !important;
+	width: 100% !important;
+	background: rgba(0, 0, 0, 0.2);
+	min-height: 100vh !important;
+	border-radius: 0px !important;
+	padding-left: 15px !important;
+	padding-right: 15px !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}
+
+body {
+	zoom: 1;
+}
+
+.popup h2 {
+	font-size: 26px;
+}
+.form-list {
+	flex-direction: column;
+	align-items: center;
+}
+
+.form-item {	
+	width: 100%;
+	max-width: 320px;
+}
+
+.form-item__field-wrap label,
+.form-item__field-wrap input {
+	font-size: 16px;
+}
+.form-item__field-wrap label {
+	margin-bottom: 5px;
+}
+.form-item__field-wrap {
+	margin-bottom: 25px;
+}
+.form-item input[type=submit] {
+	height: 44px;
+	font-size: 15px;
+	margin-bottom: 20px;
+	margin-top: -5px;
+}
+
+.form-item__title {
+	font-size: 26px;
+	margin-bottom: 20px;
+}
+
+.when-wrap {
+	margin-bottom: 20px;
+}
+
+.when-wrap__title, .when-wrap .when-select__item {
+	font-size: 12px !important;
+}
+
+.form-item:nth-child(2) .form-item__wrap {
+	padding-left: 15px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+	padding-right: 15px;
+}
+
+.jajc-calendar td span {
+	line-height: 28px;
+}
+
+.form-item:nth-child(3) .form-item__wrap {
+	padding: 20px !important;
+}
+
+.form-item__packet p {
+	font-size: 14px;
+}
+
+.form-item__packet>div {
+	width: 22px;
+	height: 22px;
+}
+.form-item__packet>div::before {
+	width: 12px;
+	height: 12px;
+}
+
+.form-item__packet {
+	margin-bottom: 30px !important;
+}
+
+
+}
+.selected-date span {
+	background: #3998f8 !important;
+	border: none !important;
+	color: #fff !important;
+	font-weight: 700;
+	border-radius: 5px;
+}
+
+
+
+.card-wrap__title,
+p[data-wm-water-title] {
+	font-size: 18px;
+	line-height: 26px;
+}
+
+.card-wrap__sub-title {
+	font-size: 15px;
+}
+
+.card-wrap__total {
+	font-size: 20px;
+}
+.button {
+	height: 50px;
+	font-size: 16px;
+	min-width: 250px;
+}
+
+@media screen and ( max-width: 1200px ) {
+	.wm-min-hid {
+		display: none;
+	}
+}
+.when-select__item {
+	cursor: pointer;
+}
+.when-select__item:not(.when-select__item--active):hover {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+.disabled-day{
+    border: none !important;
+    color: #d0cece !important;
+    font-weight: 700;
+    opacity: 0.5;
+}
+.disabled-day span:hover{
+	color: #d0cece !important;
+}

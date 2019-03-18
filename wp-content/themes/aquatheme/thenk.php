@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Главная
+Template Name: Спасибо
 */
 ?>
 <html>
@@ -20,12 +20,12 @@ Template Name: Главная
 		<main>
 			<div class="blur"></div>
 			<div class="main-screen">
-				<div class="logo"><img src="<?php echo get_field('logo'); ?>" alt=""></div>
+				<div class="logo"><img src="<?php echo get_field('logo', 7); ?>" alt=""></div>
 				<div class="center-wrap">
 					<h1>Доставка воды</h1>
-					<p class="main-sub-title"><?php echo get_field('text_1') ?></p>
-					<span class="button--main" id="start-order"><?php echo get_field('text_2') ?></span>
-					<a href="tel:<?php echo str_replace ( ['(', ')', ' ', '-', '+'], '', get_field('the_phone') ); ?>" class="main-phone"><?php echo get_field('the_phone'); ?></a>
+					<p class="main-sub-title"><?php echo get_field('text_1', 7) ?></p>
+					<span class="button--main" id="start-order"><?php echo get_field('text_2', 7) ?></span>
+					<a href="tel:<?php echo str_replace ( ['(', ')', ' ', '-', '+'], '', get_field('the_phone', 7) ); ?>" class="main-phone"><?php echo get_field('the_phone', 7); ?></a>
 				</div>
 			</div>
 			<div class="popup-wrap">
@@ -47,7 +47,7 @@ Template Name: Главная
 						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
+							<div><img src="<?php echo get_field('img_aqua_star', 7); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Аквастар</span>
 					</div>
@@ -65,7 +65,7 @@ Template Name: Главная
 						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
+							<div><img src="<?php echo get_field('img_blago', 7); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Благодатна</span>
 					</div>
@@ -83,7 +83,7 @@ Template Name: Главная
 						</div>
 						<div class="direction-item__info"></div>
 						<div class="direction-item__img">
-							<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
+							<div><img src="<?php echo get_field('img_shop', 7); ?>" alt=""></div>
 						</div>
 						<span class="direction-item__button">Магазин</span>
 					</div>
@@ -106,7 +106,7 @@ Template Name: Главная
 				    			</div>
 				    			<div class="direction-item__info"></div>
 				    			<div class="direction-item__img">
-				    				<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
+				    				<div><img src="<?php echo get_field('img_aqua_star', 7); ?>" alt=""></div>
 				    			</div>
 				    			<span class="direction-item__button">Аквастар</span>
 				    		</div>
@@ -126,7 +126,7 @@ Template Name: Главная
 				    			</div>
 				    			<div class="direction-item__info"></div>
 				    			<div class="direction-item__img">
-				    				<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
+				    				<div><img src="<?php echo get_field('img_blago', 7); ?>" alt=""></div>
 				    			</div>
 				    			<span class="direction-item__button">Благодатна</span>
 				    		</div>
@@ -146,7 +146,7 @@ Template Name: Главная
 				    			</div>
 				    			<div class="direction-item__info"></div>
 				    			<div class="direction-item__img">
-				    				<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
+				    				<div><img src="<?php echo get_field('img_shop', 7); ?>" alt=""></div>
 				    			</div>
 				    			<span class="direction-item__button">Магазин</span>
 				    		</div>
@@ -193,10 +193,10 @@ Template Name: Главная
 								<div class="when-wrap">
 									<p class="when-wrap__title">ВРЕМЯ ДОСТАВКИ</p>
 									<div class="when-select-wrap">
-										<p class="when-select__item when-select__item--active"><?php echo get_field('default_time'); ?></p>
+										<p class="when-select__item when-select__item--active"><?php echo get_field('default_time', 7); ?></p>
 										<div class="wm-select-time">
 											<?php 
-												$delivery_time = get_field('delivery_time');
+												$delivery_time = get_field('delivery_time', 7);
 												foreach ($delivery_time as $key => $value) :
 											?>
 												<p class="when-select__item"><?php echo $value['the_time']; ?></p>
@@ -214,7 +214,7 @@ Template Name: Главная
 							<div class="form-item__wrap">
 								<label for="" class="form-item__packet before-none">
 									<div></div>
-									<p><?php echo get_field('start_desc'); ?><span><?php echo get_field('price_start'); ?></span></p>
+									<p><?php echo get_field('start_desc', 7); ?><span><?php echo get_field('price_start', 7); ?></span></p>
 								</label>
 								<div class="card-wrap">
 									<div class="card-wrap__left">
@@ -222,7 +222,7 @@ Template Name: Главная
 									 </div>
 									 <div class="card-wrap__right">
 									 	<p class="card-wrap__title">Вода <p data-wm-water-title="true">Аквастар</p></p>
-									 	<p class="card-wrap__sub-title"><?php echo get_field('single_desc'); ?><br><span data-wm-s2-prices></span></p>
+									 	<p class="card-wrap__sub-title"><?php echo get_field('single_desc', 7); ?><br><span data-wm-s2-prices></span></p>
 									 	<div class="card-wrap__quantity">
 									 		<p>Количество</p>
 									 		<div>
@@ -259,7 +259,7 @@ Template Name: Главная
 						<div class="offer-item wm-hid" data-wm-name="аквастар">
 							<div class="offer-item__column">
 								<div class="offer-item__img">
-									<div><img src="<?php echo get_field('img_aqua_star'); ?>" alt=""></div>
+									<div><img src="<?php echo get_field('img_aqua_star', 7); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="offer-item__column">
@@ -283,7 +283,7 @@ Template Name: Главная
 						<div class="offer-item wm-hid" data-wm-name="благодатна">
 							<div class="offer-item__column">
 								<div class="offer-item__img">
-									<div><img src="<?php echo get_field('img_blago'); ?>" alt=""></div>
+									<div><img src="<?php echo get_field('img_blago', 7); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="offer-item__column">
@@ -307,7 +307,7 @@ Template Name: Главная
 						<div class="offer-item wm-hid" data-wm-name="магазин">
 							<div class="offer-item__column">
 								<div class="offer-item__img">
-									<div><img src="<?php echo get_field('img_shop'); ?>" alt=""></div>
+									<div><img src="<?php echo get_field('img_shop', 7); ?>" alt=""></div>
 								</div>
 							</div>
 							<div class="offer-item__column">
@@ -353,51 +353,17 @@ Template Name: Главная
 				</div>
 			</div>
 		</main>
+
 	<script>
-		let price_start = <?php echo get_field('price_start_system'); ?>;
-		let ajaxUrl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-		let images = {
-			'аквастар': '<?php echo get_field('img_aqua_star'); ?>',
-			'благодатна': '<?php echo get_field('img_blago'); ?>',
-			'магазин': '<?php echo get_field('img_shop'); ?>'
-		};
-
-		let imagesPompa = {
-			'аквастар': '<?php echo get_field('img_aqua_star_pump'); ?>',
-			'благодатна': '<?php echo get_field('img_blago_pump'); ?>',
-			'магазин': '<?php echo get_field('img_shop'); ?>'
-		};
-
-		let priceListSystem = {
-			'аквастар': <?php echo get_field('price_single_system_aq_star'); ?>,
-			'благодатна': <?php echo get_field('price_single_system_blago'); ?>,
-			'магазин': <?php echo get_field('price_single_system_shop'); ?>
-		};
-
-		let priceListClient = {
-			'аквастар': '<?php echo get_field('price_single_aq_star'); ?>',
-			'благодатна': '<?php echo get_field('price_single_blago'); ?>',
-			'магазин': '<?php echo get_field('price_single_shop'); ?>'
-		};
-
-	</script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/app.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/wm_main.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/libs/calendar/js/calendar.js"></script>
-
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/swiper/swiper.min.js"></script>
-	<link rel="stylesheet" href=<?php echo get_template_directory_uri(); ?>/swiper/swiper.min.css">
-	<script>
-		var mySwiper = new Swiper('.swiper-container', {
-    loop: true,
-    speed: 400,
-    observer: true,
-    autoHeight: true,
-      navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
+		document.querySelector('[data-popup-thenk]').classList.add('popup-wrap--active');
+		document.querySelector('[data-close-thenk]').addEventListener('click', goMainPahe);
+		document.querySelector('.popup4 .popup-close').addEventListener('click', goMainPahe);
+		document.addEventListener('click', function(e){
+			if (e.target.closest('.popup4') == null) goMainPahe();
+		});
+		function goMainPahe(){
+			window.location.href = '<?php echo get_home_url(); ?>';
+		}
 	</script>
 </body>
 </html>
